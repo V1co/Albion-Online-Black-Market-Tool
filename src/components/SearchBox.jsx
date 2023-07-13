@@ -1,10 +1,8 @@
 import { useState } from 'react'
-import Item from './Item';
 
-export default function SearchBox() {
+export default function SearchBox( { items, setItems } ) {
 
   const [ query, setQuery ] = useState("");
-  const [ items, setItems ] = useState([]);
   const [ tier, setTier] = useState("T4_")
   const [ quality, setQuality ] = useState("1")
   const [ enchantment, setEnchantment ] = useState("")
@@ -57,91 +55,75 @@ export default function SearchBox() {
   }
 
   return(
-    <>
-      <div>
-        <form onSubmit={fetchData} className='m-4'>
-          <div className='flex flex-row gap-4 items-center'>
-            <input
-              className='border-black border-2 rounded-md indent-2'
-              type='text'
-              name='query'
-              placeholder='i.e. Bag'
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-            />
+    <div>
+      <form onSubmit={fetchData} className='m-4'>
+        <div className='flex flex-row gap-4 items-center'>
+          <input
+            className='border-black border-2 rounded-md indent-2'
+            type='text'
+            name='query'
+            placeholder='i.e. Bag'
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
 
-            <label htmlFor="quality">Quality:</label>
-            <select
-              className='border-black border-2 rounded-md'
-              name="quality"
-              id="quality"
-              onChange={e => setQuality(e.target.value)}
-            >
-              <option value="1">Normal</option>
-              <option value="2">Good</option>
-              <option value="3">Outstanding</option>
-              <option value="4">Excellent</option>
-              <option value="5">Masterpiece</option>
-            </select>
+          <label htmlFor="quality">Quality:</label>
+          <select
+            className='border-black border-2 rounded-md'
+            name="quality"
+            id="quality"
+            onChange={e => setQuality(e.target.value)}
+          >
+            <option value="1">Normal</option>
+            <option value="2">Good</option>
+            <option value="3">Outstanding</option>
+            <option value="4">Excellent</option>
+            <option value="5">Masterpiece</option>
+          </select>
 
-            <label htmlFor="tier">Tier:</label>
-            <select
-              className='border-black border-2 rounded-md'
-              name="tier"
-              id="tier"
-              onChange={e => setTier(e.target.value)}
-            >
-              <option value="T4_">4</option>
-              <option value="T5_">5</option>
-              <option value="T6_">6</option>
-              <option value="T7_">7</option>
-              <option value="T8_">8</option>
-            </select>
+          <label htmlFor="tier">Tier:</label>
+          <select
+            className='border-black border-2 rounded-md'
+            name="tier"
+            id="tier"
+            onChange={e => setTier(e.target.value)}
+          >
+            <option value="T4_">4</option>
+            <option value="T5_">5</option>
+            <option value="T6_">6</option>
+            <option value="T7_">7</option>
+            <option value="T8_">8</option>
+          </select>
 
-            <label htmlFor="enchantment">Enchantment:</label>
-            <select
-              className='border-black border-2 rounded-md'
-              name="enchantment"
-              id="enchantment"
-              onChange={e => setEnchantment(e.target.value)}
-            >
-              <option value="">0</option>
-              <option value="@1">1</option>
-              <option value="@2">2</option>
-              <option value="@3">3</option>
-              <option value="@4">4</option>
-            </select>
+          <label htmlFor="enchantment">Enchantment:</label>
+          <select
+            className='border-black border-2 rounded-md'
+            name="enchantment"
+            id="enchantment"
+            onChange={e => setEnchantment(e.target.value)}
+          >
+            <option value="">0</option>
+            <option value="@1">1</option>
+            <option value="@2">2</option>
+            <option value="@3">3</option>
+            <option value="@4">4</option>
+          </select>
 
-            <label htmlFor="server">Server:</label>
-            <select
-              className='border-black border-2 rounded-md'
-              name="server"
-              id="server"
-              onChange={e => setServer(e.target.value)}
-            >
-              <option value="east">East</option>
-              <option value="west">West</option>
-            </select>
+          <label htmlFor="server">Server:</label>
+          <select
+            className='border-black border-2 rounded-md'
+            name="server"
+            id="server"
+            onChange={e => setServer(e.target.value)}
+          >
+            <option value="east">East</option>
+            <option value="west">West</option>
+          </select>
 
-            <button type='submit' className='border-black border-2 rounded-md'>Search</button>
-          </div>
-        </form>
-        <hr />
-      </div>
-
-      <div>
-        {items.length > 0 && (
-          console.log(items),
-          items.map(data => (
-            <Item
-              key={data.item_id}
-              name={data.item_id}
-              price={data.sell_price_min}
-              timeOfSale={data.sell_price_min_date}
-            />
-          ))
-        )}
-      </div>
-    </>
+          <button type='submit' className='border-black border-2 rounded-md'>Search</button>
+        </div>
+      </form>
+      <hr />
+    </div>
   )
 }
