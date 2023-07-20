@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import MultiSelectInput from './MultiSelectInput'
 
-export default function SearchBox( { setItems, queryArray, setQueryArray } ) {
+export default function SearchBox( { setItems } ) {
 
   const [ tier, setTier] = useState("T4_")
   const [ quality, setQuality ] = useState("1")
   const [ enchantment, setEnchantment ] = useState("")
   const [ server, setServer ] = useState("east")
+  const [ queryArray, setQueryArray ] = useState([]);
 
   const fetchData = async (e) => {
     e.preventDefault();
@@ -38,7 +39,7 @@ export default function SearchBox( { setItems, queryArray, setQueryArray } ) {
       <form onSubmit={fetchData} className='m-4'>
         <MultiSelectInput setQueryArray={setQueryArray} />
 
-        <div className='flex flex-row gap-4 items-center justify-center'>
+        <div className='flex flex-row gap-4 items-center justify-center mb-4'>
           <label htmlFor="quality">Quality:</label>
           <select
             className='border-gray-300 border rounded-md'
@@ -91,11 +92,11 @@ export default function SearchBox( { setItems, queryArray, setQueryArray } ) {
             <option value="east">East</option>
             <option value="west">West</option>
           </select>
-
           <button type='submit' className='border-gray-500 border rounded-md'>Search</button>
         </div>
       </form>
       <hr />
+      <br/>
     </div>
   )
 }
