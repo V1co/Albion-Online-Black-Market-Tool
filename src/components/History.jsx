@@ -8,7 +8,7 @@ const History = ( { items } ) => {
       items.map(data => (
         <Item
           key={data.item_id}
-          name={data.item_id}
+          callbackName={data.item_id}
           price={data.sell_price_min}
           timeOfSale={data.sell_price_min_date}
         />
