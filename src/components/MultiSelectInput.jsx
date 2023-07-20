@@ -5,9 +5,9 @@ import itemsData from '../helpers/items.json'
 export default function MultiSelectInput( { setQueryArray } ) {
   const animatedComponents = makeAnimated();
 
-  const selectOptions = itemsData.map(item => ({
-    value: item.query,
-    label: item.name
+  const selectOptions = Object.entries(itemsData).map(([k, v]) => ({
+    value: k,
+    label: v
   }))
 
   const handleChange = (selectedOptions) => {
