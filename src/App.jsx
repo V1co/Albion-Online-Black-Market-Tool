@@ -15,9 +15,15 @@ function App() {
     return savedItems || [];
   }
 
+  function clearLocalStorage() {
+    localStorage.clear()
+    setItems([])
+  }
+
   return (
     <>
       <h1>Albion Online Black Market Tool</h1>
+      <button className='border-gray-500 border rounded-md mt-4' onClick={clearLocalStorage}>Clear LocalStorage</button>
       <SearchBox setItems={setItems} />
       <History items={items} />
     </>

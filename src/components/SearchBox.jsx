@@ -12,11 +12,6 @@ export default function SearchBox( { setItems } ) {
   const fetchData = async (e) => {
     e.preventDefault();
 
-    // Tried to use Promise.all but unfortunately it fails if any of promises fail
-    // const promises = queryArray.map(item => {
-    //   return `https://${server}.albion-online-data.com/api/v2/stats/prices/${tier}${item.value}${enchantment}?locations=Black Market&qualities=${quality}`
-    // })
-
      for (let i = 0; i < queryArray.length; i++) {
       const url = `https://${server}.albion-online-data.com/api/v2/stats/prices/${tier}${queryArray[i].value}${enchantment}?locations=Black Market&qualities=${quality}`
 
