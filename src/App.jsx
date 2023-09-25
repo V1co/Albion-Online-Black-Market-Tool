@@ -4,16 +4,12 @@ import History from './components/History'
 import { useEffect, useState } from 'react'
 
 function App() {
-  const [items, setItems] = useState(getInitialItems())
+  // Lazy state initialization through arrow function which returns localStorage saved data
+  const [items, setItems] = useState(() => JSON.parse(localStorage.getItem('items')) || [])
 
   useEffect(() => {
     localStorage.setItem('items', JSON.stringify(items))
   }, [items])
-
-  function getInitialItems() {
-    const savedItems = JSON.parse(localStorage.getItem('items'));
-    return savedItems || [];
-  }
 
   function clearLocalStorage() {
     localStorage.clear()
