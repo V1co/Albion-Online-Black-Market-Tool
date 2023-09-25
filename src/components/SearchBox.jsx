@@ -3,18 +3,33 @@ import MultiSelectInput from './MultiSelectInput'
 
 export default function SearchBox( { setItems } ) {
 
-  const [ tier, setTier] = useState("T4_")
-  const [ quality, setQuality ] = useState("1")
-  const [ enchantment, setEnchantment ] = useState("")
-  const [ server, setServer ] = useState("east")
   const [ queryArray, setQueryArray ] = useState([]);
+  const [ formData, setFormData ] = useState({
+    tier: "T4_",
+    quality: "1",
+    enchantment: "",
+    server: "west"
+  })
+
+  function handleForm(e) {
+    const { name, value } = e.target
+    console.log(e)
+    setFormData(prevFormData => {
+      return {
+        ...prevFormData,
+        [name]: value
+      }
+    })
+  }
 
   const fetchData = async (e) => {
     e.preventDefault();
 
      for (let i = 0; i < queryArray.length; i++) {
-      const url = `https://${server}.albion-online-data.com/api/v2/stats/prices/${tier}${queryArray[i].value}${enchantment}?locations=Black Market&qualities=${quality}`
-
+      console.log(queryArray)
+      console.log(formData)
+      const url = `https://${formData.server}.albion-online-data.com/api/v2/stats/prices/${formData.tier}${queryArray[i].value}${formData.enchantment}?locations=Black Market&qualities=${formData.quality}`
+      console.log(url)
       try {
         const startDate = new Date().getTime()
         const response = await fetch(url)
@@ -40,7 +55,8 @@ export default function SearchBox( { setItems } ) {
             className='border-gray-300 border rounded-md'
             name="quality"
             id="quality"
-            onChange={e => setQuality(e.target.value)}
+            value={formData.quality}
+            onChange={handleForm}
           >
             <option value="1">Normal</option>
             <option value="2">Good</option>
@@ -54,7 +70,8 @@ export default function SearchBox( { setItems } ) {
             className='border-gray-3500 border rounded-md'
             name="tier"
             id="tier"
-            onChange={e => setTier(e.target.value)}
+            value={formData.tier}
+            onChange={handleForm}
           >
             <option value="T4_">4</option>
             <option value="T5_">5</option>
@@ -68,7 +85,8 @@ export default function SearchBox( { setItems } ) {
             className='border-gray-300 border rounded-md'
             name="enchantment"
             id="enchantment"
-            onChange={e => setEnchantment(e.target.value)}
+            value={formData.enchantment}
+            onChange={handleForm}
           >
             <option value="">0</option>
             <option value="@1">1</option>
@@ -82,7 +100,8 @@ export default function SearchBox( { setItems } ) {
             className='border-gray-300 border rounded-md'
             name="server"
             id="server"
-            onChange={e => setServer(e.target.value)}
+            value={formData.server}
+            onChange={handleForm}
           >
             <option value="east">East</option>
             <option value="west">West</option>
